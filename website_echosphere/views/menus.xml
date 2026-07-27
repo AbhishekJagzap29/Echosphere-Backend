@@ -1,0 +1,19 @@
+<odoo>
+
+    <menuitem id="menu_website_about"
+              name="About"
+              parent="website.main_menu"/>
+
+    <menuitem id="menu_website_services"
+              name="Services"
+              parent="website.main_menu"/>
+
+    <menuitem id="menu_website_careers"
+              name="Careers"
+              parent="website.main_menu"/>
+
+    <menuitem id="menu_website_contact"
+              name="Contact Us"
+              parent="website.main_menu"/>
+
+</odoo>

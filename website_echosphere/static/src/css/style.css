@@ -1,0 +1,16 @@
+.hero-section {
+    padding: 80px 0;
+}
+
+.main-title {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.card {
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}

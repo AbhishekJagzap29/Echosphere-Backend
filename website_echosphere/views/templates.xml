@@ -1,0 +1,232 @@
+<odoo>
+
+    <template id="homepage_template"
+              name="Echosphere Homepage">
+
+        <t t-call="website.layout">
+
+            <div class="container mt-5">
+
+                <!-- HERO SECTION -->
+                <section class="hero-section text-center">
+
+                    <h1 class="main-title">
+                        ECHOSPHERE
+                    </h1>
+
+                    <h3>
+                        WHY ECHOSPHERE?
+                    </h3>
+
+                    <p>
+                        Want to learn how to increase your business?
+                        Join Echosphere Family
+                    </p>
+
+                </section>
+                <!-- BANNERS -->
+                <section class="mt-5">
+
+                    <div class="row">
+
+                        <t t-foreach="banners" t-as="banner">
+
+                            <div class="col-md-12 mb-3">
+
+                                <img t-att-src="'/web/image/service.banner/%s/image' % banner.id"
+                                     class="img-fluid rounded w-100"/>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+                </section>
+
+                <!-- POPULAR SERVICES -->
+                <section class="mt-5">
+
+                    <h2>
+                        Popular Services
+                    </h2>
+
+                    <div class="row">
+
+                        <t t-foreach="popular_services" t-as="service">
+
+                            <div class="col-md-3 mb-4">
+
+                                <div class="card shadow-sm border-0 rounded-4 p-3 text-center">
+
+                                    <img t-att-src="'/web/image/service.service/%s/icon' % service.id"
+                                         width="80"
+                                         height="80"
+                                         class="mx-auto mb-3"/>
+
+                                    <h5>
+                                        <t t-esc="service.name"/>
+                                    </h5>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+                </section>
+                <!-- SERVICES -->
+                <section class="mt-5">
+
+                    <h2>
+                        Our Services
+                    </h2>
+
+                    <div class="row">
+
+                        <t t-foreach="services" t-as="service">
+
+                            <div class="col-md-3 mb-4">
+
+                                <div class="card border-0 shadow rounded-4 text-center p-3">
+
+                                    <img t-att-src="'/web/image/service.service/%s/icon' % service.id"
+                                        width="70"
+                                        height="70"
+                                        class="mx-auto mb-3"/>
+
+                                    <h5>
+                                        <t t-esc="service.name"/>
+                                    </h5>
+
+                                    <p>
+                                        <t t-esc="service.description"/>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+                </section>
+
+                <!-- ABOUT -->
+                <section class="mt-5">
+
+                    <h2>
+                        About Echosphere
+                    </h2>
+
+                    <div t-field="website_content.about_company"/>
+
+                </section>
+
+                <!-- MISSION -->
+                <section class="mt-5">
+
+                    <h2>
+                        Mission Of Company
+                    </h2>
+
+                    <div t-field="website_content.mission"/>
+
+                </section>
+                <!-- VISION -->
+                <section class="mt-5">
+
+                    <h2>
+                        What We Do
+                    </h2>
+
+                    <div t-field="website_content.what_we_do"/>
+
+                </section>
+
+                <!-- FEATURED PROVIDERS -->
+                <section class="mt-5">
+
+                    <h2>
+                        Featured Providers
+                    </h2>
+
+                    <div class="row">
+
+                        <t t-foreach="featured_providers" t-as="provider">
+
+                            <div class="col-md-3 mb-4">
+
+                                <div class="card border-0 shadow rounded-4 p-3 text-center">
+
+                                    <img t-att-src="'/web/image/service.detail/%s/image' % provider.id"
+                                         class="img-fluid rounded mb-3"/>
+
+                                    <h5>
+                                        <t t-esc="provider.name"/>
+                                    </h5>
+
+                                    <p>
+                                        Discount:
+                                        <t t-esc="int(provider.discount)"/>%
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+                </section>
+                <!-- NEWS -->
+                <section class="mt-5 mb-5">
+
+                    <h2>
+                        News &amp; Updates
+                    </h2>
+
+                    <div class="row">
+
+                        <t t-foreach="news" t-as="item">
+
+                            <div class="col-md-4 mb-4">
+
+                                <div class="card border-0 shadow rounded-4">
+
+                                    <img t-att-src="'/web/image/service.news/%s/image' % item.id"
+                                         class="card-img-top"/>
+
+                                    <div class="card-body">
+
+                                        <h5>
+                                            <t t-esc="item.title"/>
+                                        </h5>
+
+                                        <p>
+                                            <t t-esc="item.description"/>
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </t>
+
+    </template>
+
+</odoo>

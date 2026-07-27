@@ -1,0 +1,59 @@
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_news_tree" model="ir.ui.view">
+        <field name="name">service.news.tree</field>
+        <field name="model">service.news</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="date"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_news_form" model="ir.ui.view">
+        <field name="name">service.news.form</field>
+        <field name="model">service.news</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="title"/>
+                        <field name="date"/>
+                        <field name="active"/>
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                    <group>
+                        <field name="image"
+                               widget="image"
+                               class="oe_avatar"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_news" model="ir.actions.act_window">
+        <field name="name">News &amp; Updates</field>
+        <field name="res_model">service.news</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_news"
+              name="News &amp; Updates"
+              parent="menu_service_root"
+              action="action_news"
+              sequence="5"/>
+
+</odoo>

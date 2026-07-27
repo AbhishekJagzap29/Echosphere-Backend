@@ -1,0 +1,22 @@
+{
+    'name': 'Service Hierarchy Management',
+    'version': '17.0.1.0.0',
+    'summary': 'Manage Services, Subservices and Service Details',
+    'category': 'Services',
+    'author': 'OpenAI',
+    'depends': ['base'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'views/service_views.xml',
+        # 'views/banner_views.xml',
+        # 'views/news_views.xml',
+        'views/customer_views.xml',
+        # 'views/executive_views.xml',
+        'views/service_request_views.xml', 
+        'views/menus.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

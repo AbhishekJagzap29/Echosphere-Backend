@@ -1,0 +1,105 @@
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_customer_tree" model="ir.ui.view">
+        <field name="name">service.customer.tree</field>
+        <field name="model">service.customer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="card_number"/>
+                <field name="taluka_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_customer_form" model="ir.ui.view">
+        <field name="name">service.customer.form</field>
+        <field name="model">service.customer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="photo"
+                               widget="image"
+                               class="oe_avatar"/>
+                    </group>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="card_number"/>
+                        <field name="dob"/>
+                        <field name="age"/>
+                    </group>
+
+                    <group>
+                        <field name="address"/>
+                        <field name="taluka_id"/>
+                        <field name="district"/>
+                        <field name="state"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_customer" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">service.customer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Taluka Tree -->
+    <record id="view_taluka_tree" model="ir.ui.view">
+        <field name="name">service.taluka.tree</field>
+        <field name="model">service.taluka</field>
+
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="name"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <!-- Taluka Form -->
+    <record id="view_taluka_form" model="ir.ui.view">
+        <field name="name">service.taluka.form</field>
+        <field name="model">service.taluka</field>
+
+        <field name="arch" type="xml">
+
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_taluka" model="ir.actions.act_window">
+
+        <field name="name">Talukas</field>
+
+        <field name="res_model">service.taluka</field>
+
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    
+
+</odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_service_service,service.service,model_service_service,,1,1,1,1
+access_service_subservice,service.subservice,model_service_subservice,,1,1,1,1
+access_service_detail,service.detail,model_service_detail,,1,1,1,1
+access_provider_gallery,provider.gallery,model_provider_gallery,,1,1,1,1
+access_service_banner,service.banner,model_service_banner,,1,1,1,1
+access_service_news,service.news,model_service_news,,1,1,1,1
+access_service_customer,service.customer,model_service_customer,,1,1,1,1
+access_service_executive,service.executive,model_service_executive,,1,1,1,1
+access_service_taluka,service.taluka,model_service_taluka,,1,1,1,1
+access_service_request,service.request,model_service_request,,1,1,1,1
+access_service_request_executive,service.request.executive,model_service_request,service_hierarchy_module.group_service_executive,1,1,1,0
+access_service_request_admin,service.request.admin,model_service_request,service_hierarchy_module.group_service_admin,1,1,1,1
+access_provider_facility,access.provider.facility,model_provider_facility,base.group_user,1,1,1,1
+access_provider_discount,access_provider_discount,model_provider_discount,base.group_user,1,1,1,1

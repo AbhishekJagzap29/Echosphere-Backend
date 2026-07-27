@@ -1,0 +1,9 @@
+<odoo>
+    <template id="replace_login" name="Login Layout" inherit_id="web.login_layout">
+        <xpath expr="//a[@target='_blank']" position="replace">
+            <a href="https://echosphere.in" target="_blank">
+                Powered by <span>Echosphere</span>
+            </a>
+        </xpath>
+    </template>
+</odoo>

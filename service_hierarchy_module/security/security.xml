@@ -1,0 +1,19 @@
+<odoo>
+
+    <!-- Executive Group -->
+    <record id="group_service_executive"
+            model="res.groups">
+
+        <field name="name">Service Executive</field>
+
+    </record>
+
+    <!-- Admin Group -->
+    <record id="group_service_admin"
+            model="res.groups">
+
+        <field name="name">Service Admin</field>
+
+    </record>
+
+</odoo>

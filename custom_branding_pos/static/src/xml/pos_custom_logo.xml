@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="pos_custom_logo"
+              inherit_id="point_of_sale.Chrome"
+              name="POS Custom Logo"
+              priority="9999">
+
+        <xpath expr="//div[hasclass('pos-branding')]/img" position="replace">
+            <img class="pos-logo"
+                 src="/custom_branding_pos/static/src/img/oakmont-logo.png"
+                 alt="Oakmont Logo"/>
+        </xpath>
+    </template>
+</odoo>

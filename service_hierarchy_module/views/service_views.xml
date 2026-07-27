@@ -1,0 +1,315 @@
+<odoo>
+
+    <!-- Main Service Tree View -->
+    <record id="view_service_tree" model="ir.ui.view">
+        <field name="name">service.service.tree</field>
+        <field name="model">service.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Main Service Form View -->
+    <record id="view_service_form" model="ir.ui.view">
+        <field name="name">service.service.form</field>
+        <field name="model">service.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="is_popular"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Subservices">
+                            <field name="subservice_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Subservice Tree View -->
+    <record id="view_subservice_tree" model="ir.ui.view">
+        <field name="name">service.subservice.tree</field>
+        <field name="model">service.subservice</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="service_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Subservice Form View -->
+    <record id="view_subservice_form" model="ir.ui.view">
+        <field name="name">service.subservice.form</field>
+        <field name="model">service.subservice</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="service_id"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Service Details">
+                            <field name="detail_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="address"/>
+                                    <field name="phone"/>
+                                    <!-- <field name="discount"/> -->
+                                    <!-- <field name="image" widget="image"
+                                                     class="oe_avatar"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Service Detail Tree View -->
+    <record id="view_service_detail_tree" model="ir.ui.view">
+        <field name="name">service.detail.tree</field>
+        <field name="model">service.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <!-- <field name="discount"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Service Detail Form View -->
+    <record id="view_service_detail_form" model="ir.ui.view">
+        <field name="name">service.detail.form</field>
+        <field name="model">service.detail</field>
+        <field name="arch" type="xml">
+            <form string="Service Detail">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"
+                                placeholder="Enter service name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="subservice_id"/>
+                            <field name="phone"/>
+                            <field name="whatsapp"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                            <field name="owner_id"/>
+                        </group>
+                        <!-- <group>
+                            <field name="image"
+                                widget="image"
+                                class="oe_avatar"/>
+                        </group> -->
+                    </group>
+                    <notebook>
+                        <page string="Address &amp; Location">
+                            <group>
+                                <group>
+                                    <field name="address"/>
+                                    <field name="taluka_id"/>
+                                </group>
+                                <group>
+                                    <field name="district"/>
+                                    <field name="state"/>
+                                    <field name="pincode"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Service Information">
+                            <group>
+                                <group>
+                                    <!-- <field name="discount"/> -->
+                                    <field name="rating"/>
+                                    <field name="review_count"/>
+                                    <field name="youtube_link"/>
+                                    <field name="facebook_link"/>
+                                    <field name="instagram_link"/>
+                                </group>
+                                <group>
+                                    <field name="open_24_hours"/>
+                                    <field name="is_verified"/>
+                                    <field name="is_featured"/>
+                                </group>
+                            </group>
+                        </page>
+                        <!-- <page string="Map Coordinates">
+                            <group>
+                                <group>
+                                    <field name="latitude"/>
+                                </group>
+                                <group>
+                                    <field name="longitude"/>
+                                </group>
+                            </group>
+                        </page> -->
+                        <page string="Facilities">
+                            <field name="facility_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Discounts">
+                            <field name="discount_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Gallery">
+                            <field name="gallery_ids">
+                                <tree editable="bottom">
+                                    <field name="image"
+                                        widget="image"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Search View -->
+    <record id="view_service_detail_search" model="ir.ui.view">
+        <field name="name">service.detail.search</field>
+        <field name="model">service.detail</field>
+        <field name="arch" type="xml">
+
+            <search>
+                <!-- Search -->
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="taluka_id"/>
+                <field name="district"/>
+                <!-- Filters -->
+                <filter string="Featured"
+                        name="featured"
+                        domain="[('is_featured', '=', True)]"/>
+                <filter string="Verified"
+                        name="verified"
+                        domain="[('is_verified', '=', True)]"/>
+                <filter string="24 Hours Open"
+                        name="open_24"
+                        domain="[('open_24_hours', '=', True)]"/>
+                <filter string="Active"
+                        name="active"
+                        domain="[('active', '=', True)]"/>
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter string="Taluka"
+                            name="group_taluka"
+                            context="{'group_by': 'taluka_id'}"/>
+                    <filter string="District"
+                            name="group_district"
+                            context="{'group_by': 'district'}"/>
+                    <filter string="State"
+                            name="group_state"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Kanban View -->
+    <record id="view_service_detail_kanban" model="ir.ui.view">
+        <field name="name">service.detail.kanban</field>
+        <field name="model">service.detail</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="phone"/>
+                <!-- <field name="discount"/> -->
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image(
+                                    'service.detail',
+                                    'image',
+                                    record.id.raw_value
+                                )"
+                                width="100"
+                                height="100"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="phone"/>
+                                </div>
+                                <!-- <div>
+                                    Discount:
+                                    <field name="discount"/>%
+                                </div> -->
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_service" model="ir.actions.act_window">
+        <field name="name">Services</field>
+        <field name="res_model">service.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_subservice" model="ir.actions.act_window">
+        <field name="name">Subservices</field>
+        <field name="res_model">service.subservice</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <record id="action_service_detail" model="ir.actions.act_window">
+        <field name="name">Service Details</field>
+        <field name="res_model">service.detail</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id"
+           ref="view_service_detail_search"/>
+    </record> -->
+    <record id="action_service_detail" model="ir.actions.act_window">
+        <field name="name">Service Details</field>
+
+        <field name="res_model">service.detail</field>
+
+        <field name="view_mode">tree,form</field>
+
+        <field name="search_view_id"
+            ref="view_service_detail_search"/>
+
+        <field name="context">
+            {
+                'group_by':'subservice_id'
+            }
+        </field>
+
+    </record>
+
+
+</odoo>

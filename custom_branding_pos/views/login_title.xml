@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_web_title" inherit_id="web.layout" name="Custom Web Title">
+        <xpath expr="//title" position="replace">
+            <title>Echosphere</title>
+        </xpath>
+    </template>
+    <record id="view_company_form_website_placeholder_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.website.placeholder.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="placeholder">e.g.https://echosphere.in</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

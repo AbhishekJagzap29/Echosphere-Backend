@@ -1,0 +1,79 @@
+<odoo>
+<!-- Root Menu -->
+    <menuitem id="menu_service_root"
+            name="Services"
+            sequence="1"/>
+
+    <menuitem id="service_root"
+            name="Services"
+            parent="menu_service_root"
+            sequence="3"/>
+
+    <menuitem id="configuration_root"
+            name="Configuration"
+            parent="menu_service_root"
+            sequence="3"/>
+
+    <!-- Main Services -->
+    <menuitem id="menu_service"
+            name="Main Services"
+            parent="service_root"
+            action="action_service"
+            sequence="1"/>
+
+    <!-- Subservices -->
+    <menuitem id="menu_subservice"
+            name="Subservices"
+            parent="service_root"
+            action="action_subservice"
+            sequence="2"/>
+
+    <!-- Service Details -->
+    <menuitem id="menu_service_detail"
+            name="Service Details"
+            parent="service_root"
+            action="action_service_detail"
+            sequence="3"/>
+
+    <!-- Banners -->
+    <!-- <menuitem id="menu_banner"
+            name="Banners"
+            parent="configuration_root"
+            action="action_banner"
+            sequence="4"/> -->
+
+    <!-- News -->
+    <!-- <menuitem id="menu_news"
+            name="News &amp; Updates"
+            parent="configuration_root"
+            action="action_news"
+            sequence="5"/> -->
+
+    <!-- Customers -->
+    <menuitem id="menu_customer"
+            name="Customers"
+            parent="configuration_root"
+            action="action_customer"
+            sequence="6"/>
+
+    <!-- Executives -->
+    <!-- <menuitem id="menu_executive"
+            name="Executives"
+            parent="configuration_root"
+            action="action_executive"
+            sequence="7"/> -->
+
+        <menuitem id="menu_taluka"
+            name="Talukas"
+            parent="configuration_root"
+            action="action_taluka"
+            sequence="8"/>
+
+         <menuitem id="menu_service_request"
+              name="Service Requests"
+              parent="configuration_root"
+              action="action_service_request"
+              groups="service_hierarchy_module.group_service_admin"
+              sequence="10"/>
+
+</odoo>

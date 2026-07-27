@@ -1,0 +1,56 @@
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_executive_tree" model="ir.ui.view">
+        <field name="name">service.executive.tree</field>
+        <field name="model">service.executive</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="designation"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_executive_form" model="ir.ui.view">
+        <field name="name">service.executive.form</field>
+        <field name="model">service.executive</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="image"
+                               widget="image"
+                               class="oe_avatar"/>
+                    </group>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="designation"/>
+                        <field name="active"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_executive" model="ir.actions.act_window">
+        <field name="name">Executives</field>
+        <field name="res_model">service.executive</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_executive"
+              name="Executives"
+              parent="menu_service_root"
+              action="action_executive"
+              sequence="7"/>
+
+</odoo>

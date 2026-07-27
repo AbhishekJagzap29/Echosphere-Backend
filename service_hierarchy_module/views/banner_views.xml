@@ -1,0 +1,55 @@
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_banner_tree" model="ir.ui.view">
+        <field name="name">service.banner.tree</field>
+        <field name="model">service.banner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="sequence"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_banner_form" model="ir.ui.view">
+        <field name="name">service.banner.form</field>
+        <field name="model">service.banner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="title"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+
+                    <group>
+                        <field name="image"
+                               widget="image"
+                               class="oe_avatar"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_banner" model="ir.actions.act_window">
+        <field name="name">Banners</field>
+        <field name="res_model">service.banner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_banner"
+              name="Banners"
+              parent="menu_service_root"
+              action="action_banner"
+              sequence="4"/>
+
+</odoo>
