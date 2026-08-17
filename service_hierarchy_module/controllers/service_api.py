@@ -459,6 +459,14 @@ class ServiceAPI(http.Controller):
 
             for detail in details:
 
+                gallery_images = [
+                    gallery.image.decode()
+                    if gallery.image else False
+                    for gallery in detail.gallery_ids
+                ]
+
+                first_image = gallery_images[0] if gallery_images else False
+
                 data.append({
                     'id': detail.id,
                     'name': detail.name,
@@ -509,11 +517,8 @@ class ServiceAPI(http.Controller):
                         detail.facebook_link,
                     'instagram_link':
                         detail.instagram_link,
-                    'gallery_images': [
-                        gallery.image.decode()
-                        if gallery.image else False
-                        for gallery in detail.gallery_ids
-                    ],
+                    'image': first_image,
+                    'gallery_images': gallery_images,
                     'facilities': [
                         facility.name
                         for facility in detail.facility_ids
@@ -541,89 +546,257 @@ class ServiceAPI(http.Controller):
                 status=500
             )
         
-    @http.route('/api/popular_services',
-                type='http',
-                auth='public',
-                methods=['GET'],
-                csrf=False,
-                cors='*')
+    # @http.route('/api/popular_services',
+    #             type='http',
+    #             auth='public',
+    #             methods=['GET'],
+    #             csrf=False,
+    #             cors='*')
+    # def popular_services(self):
+
+    #     try:
+
+    #         services = request.env[
+    #             'service.service'
+    #         ].sudo().search([
+
+    #             ('is_popular', '=', True),
+    #             ('active', '=', True)
+
+    #         ], order='sequence asc')
+
+    #         data = []
+
+    #         for service in services:
+
+    #             # --------------------------------
+    #             # FIND SUBSERVICES
+    #             # --------------------------------
+    #             subservices = request.env[
+    #                 'service.subservice'
+    #             ].sudo().search([
+
+    #                 ('service_id', '=', service.id)
+
+    #             ])
+
+    #             # --------------------------------
+    #             # FIND DETAIL WITH GALLERY
+    #             # --------------------------------
+    #             detail = request.env[
+    #                 'service.detail'
+    #             ].sudo().search([
+
+    #                 ('subservice_id', 'in', subservices.ids),
+    #                 ('gallery_ids', '!=', False)
+
+    #             ], limit=1, order='id desc')
+
+    #             image = False
+
+    #             # --------------------------------
+    #             # GET FIRST GALLERY IMAGE
+    #             # --------------------------------
+    #             if detail and detail.gallery_ids:
+
+    #                 first_image = detail.gallery_ids[0]
+
+    #                 if first_image.image:
+
+    #                     image = first_image.image.decode()
+
+    #             data.append({
+
+    #                 'id':
+    #                     service.id,
+
+    #                 'name':
+    #                     service.name,
+
+    #                 'description':
+    #                     service.description,
+
+    #                 'image':
+    #                     image,
+
+    #             })
+
+    #         return Response(
+    #             json.dumps({
+
+    #                 'status': 'SUCCESS',
+
+    #                 'data':
+    #                     data
+
+    #             }),
+    #             content_type='application/json',
+    #             status=200
+    #         )
+
+    #     except Exception as e:
+
+    #         return Response(
+    #             json.dumps({
+
+    #                 'status': 'ERROR',
+
+    #                 'message':
+    #                     str(e)
+
+    #             }),
+    #             content_type='application/json',
+    #             status=500
+    #         )
+        
+
+
+    
+    @http.route(
+        '/api/popular_services',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False,
+        cors='*'
+    )
     def popular_services(self):
 
         try:
 
-            services = request.env[
-                'service.service'
+            popular_details = request.env[
+                'service.detail'
             ].sudo().search([
-
                 ('is_popular', '=', True),
-                ('active', '=', True)
-
-            ], order='sequence asc')
+                ('active', '=', True),
+            ], order='sequence asc, id desc')
 
             data = []
 
-            for service in services:
+            for detail in popular_details:
 
                 # --------------------------------
-                # FIND SUBSERVICES
+                # ALL GALLERY IMAGES & PRIMARY IMAGE
                 # --------------------------------
-                subservices = request.env[
-                    'service.subservice'
-                ].sudo().search([
+                gallery_images = [
+                    gallery.image.decode()
+                    if gallery.image else False
+                    for gallery in detail.gallery_ids
+                ]
 
-                    ('service_id', '=', service.id)
-
-                ])
-
-                # --------------------------------
-                # FIND DETAIL WITH GALLERY
-                # --------------------------------
-                detail = request.env[
-                    'service.detail'
-                ].sudo().search([
-
-                    ('subservice_id', 'in', subservices.ids),
-                    ('gallery_ids', '!=', False)
-
-                ], limit=1, order='id desc')
-
-                image = False
+                first_image = gallery_images[0] if gallery_images else False
 
                 # --------------------------------
-                # GET FIRST GALLERY IMAGE
+                # DISCOUNTS
                 # --------------------------------
-                if detail and detail.gallery_ids:
+                discounts = [
+                    discount.name
+                    for discount in detail.discount_ids
+                ]
 
-                    first_image = detail.gallery_ids[0]
+                # --------------------------------
+                # FACILITIES
+                # --------------------------------
+                facilities = [
+                    facility.name
+                    for facility in detail.facility_ids
+                ]
 
-                    if first_image.image:
+                # --------------------------------
+                # PARENT SERVICE
+                # --------------------------------
+                service = (
+                    detail.subservice_id.service_id
+                    if detail.subservice_id
+                    else False
+                )
 
-                        image = first_image.image.decode()
-
+                # --------------------------------
+                # RESPONSE
+                # Same fields as service_details API
+                # --------------------------------
                 data.append({
 
-                    'id':
-                        service.id,
+                    # Service Detail
+                    'id': detail.id,
+                    'name': detail.name,
 
-                    'name':
-                        service.name,
+                    # Primary Image (Home/Popular Card)
+                    'image': first_image,
 
-                    'description':
-                        service.description,
+                    'address': detail.address,
+                    'phone': detail.phone,
 
-                    'image':
-                        image,
+                    # Discounts
+                    'discounts': discounts,
+
+                    # Parent Service
+                    'service_id':
+                        service.id if service else False,
+
+                    'service_name':
+                        service.name if service else '',
+
+                    # Subservice
+                    'subservice_id':
+                        detail.subservice_id.id
+                        if detail.subservice_id else False,
+
+                    'subservice_name':
+                        detail.subservice_id.name
+                        if detail.subservice_id else '',
+
+                    # Location
+                    'taluka_id':
+                        detail.taluka_id.id
+                        if detail.taluka_id else False,
+
+                    'taluka_name':
+                        detail.taluka_id.name
+                        if detail.taluka_id else '',
+
+                    'district': detail.district or '',
+                    'state': detail.state or '',
+                    'pincode': detail.pincode or '',
+
+                    # Provider Information
+                    'owner_id': detail.owner_id,
+                    'whatsapp': detail.whatsapp or '',
+                    'email': detail.email or '',
+                    'website': detail.website or '',
+
+                    # Location Coordinates
+                    'latitude': detail.latitude,
+                    'longitude': detail.longitude,
+
+                    # Rating
+                    'rating': detail.rating,
+                    'review_count': detail.review_count,
+
+                    # Flags
+                    'is_featured': detail.is_featured,
+                    'is_popular': detail.is_popular,
+                    'is_verified': detail.is_verified,
+                    'open_24_hours': detail.open_24_hours,
+
+                    # Social Media
+                    'youtube_link': detail.youtube_link or '',
+                    'facebook_link': detail.facebook_link or '',
+                    'instagram_link': detail.instagram_link or '',
+
+                    # ALL Gallery Images
+                    'gallery_images': gallery_images,
+
+                    # Facilities
+                    'facilities': facilities,
 
                 })
 
             return Response(
                 json.dumps({
-
                     'status': 'SUCCESS',
-
-                    'data':
-                        data
-
+                    'count': len(data),
+                    'data': data
                 }),
                 content_type='application/json',
                 status=200
@@ -631,19 +804,19 @@ class ServiceAPI(http.Controller):
 
         except Exception as e:
 
+            _logger.error(
+                "Popular Services API Error: %s",
+                str(e)
+            )
+
             return Response(
                 json.dumps({
-
                     'status': 'ERROR',
-
-                    'message':
-                        str(e)
-
+                    'message': str(e)
                 }),
                 content_type='application/json',
                 status=500
             )
-        
     @http.route('/api/other_services',
                 type='http',
                 auth='public',

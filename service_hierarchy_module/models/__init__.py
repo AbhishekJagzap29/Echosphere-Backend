@@ -7,3 +7,5 @@ from . import news
 from . import customer
 from . import executive 
 from . import service_request
+from . import discount_card
+from . import agency_application

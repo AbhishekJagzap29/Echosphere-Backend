@@ -13,3 +13,8 @@ access_service_request_executive,service.request.executive,model_service_request
 access_service_request_admin,service.request.admin,model_service_request,service_hierarchy_module.group_service_admin,1,1,1,1
 access_provider_facility,access.provider.facility,model_provider_facility,base.group_user,1,1,1,1
 access_provider_discount,access_provider_discount,model_provider_discount,base.group_user,1,1,1,1
+access_discount_card,discount.card,model_discount_card,,1,1,1,1
+access_discount_card_family,discount.card.family,model_discount_card_family,,1,1,1,1
+access_discount_card_sales,discount.card.sales,model_discount_card_sales,,1,1,1,1
+access_agency_application,agency.application,model_agency_application,,1,1,1,1
+access_agency_application_sales,agency.application.sales,model_agency_application_sales,,1,1,1,1

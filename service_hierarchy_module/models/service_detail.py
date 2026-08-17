@@ -69,6 +69,11 @@ class ServiceDetail(models.Model):
         string='Featured'
     )
 
+    is_popular = fields.Boolean(
+        string='Popular',
+        default=False
+    )
+
     is_verified = fields.Boolean(
         string='Verified'
     )

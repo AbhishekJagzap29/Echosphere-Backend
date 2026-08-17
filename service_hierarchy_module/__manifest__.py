@@ -14,6 +14,7 @@
         'views/customer_views.xml',
         # 'views/executive_views.xml',
         'views/service_request_views.xml', 
+        'views/forms_views.xml',
         'views/menus.xml',
     ],
     'installable': True,

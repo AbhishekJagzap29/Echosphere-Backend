@@ -1,0 +1,156 @@
+<odoo>
+    <!-- Sequence for Discount Card Unique Code -->
+    <record id="seq_discount_card_unique_code" model="ir.sequence">
+        <field name="name">Discount Card Unique Code</field>
+        <field name="code">discount.card.unique.code</field>
+        <field name="prefix"></field>
+        <field name="padding">5</field>
+        <field name="number_next">16000</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Discount Card Form Views -->
+    <record id="view_discount_card_tree" model="ir.ui.view">
+        <field name="name">discount.card.tree</field>
+        <field name="model">discount.card</field>
+        <field name="arch" type="xml">
+            <tree string="Discount Card Forms">
+                <field name="unique_code" string="Number" width="100px"/>
+                <field name="name" width="180px"/>
+                <field name="rank" width="300px"/>
+                <field name="code_no" width="500px"/>
+                <field name="date" width="120px"/>
+                <field name="mobile" width="150px"/>
+                <field name="pin_code" width="100px"/>
+                <field name="address" width="300px"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_discount_card_form" model="ir.ui.view">
+        <field name="name">discount.card.form</field>
+        <field name="model">discount.card</field>
+        <field name="arch" type="xml">
+            <form string="Discount Card Form">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="unique_code" nolabel="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="mobile"/>
+                        </group>
+                        <group>
+                            <field name="pin_code"/>
+                            <field name="address"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Family Details" name="family_details">
+                            <field name="family_line_ids">
+                                <tree editable="bottom">
+                                    <field name="sr_no"/>
+                                    <field name="full_name"/>
+                                    <field name="age"/>
+                                    <field name="dob"/>
+                                    <field name="relationship"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Sales Record" name="sales_record">
+                            <field name="sales_line_ids">
+                                <tree editable="bottom">
+                                    <field name="sr_no" width="80px"/>
+                                    <field name="rank" width="250px"/>
+                                    <field name="code_no" width="400px"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_discount_card_form" model="ir.actions.act_window">
+        <field name="name">Discount Card Form</field>
+        <field name="res_model">discount.card</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Agency Application Form Views -->
+    <record id="view_agency_application_tree" model="ir.ui.view">
+        <field name="name">agency.application.tree</field>
+        <field name="model">agency.application</field>
+        <field name="arch" type="xml">
+            <tree string="Agency Application Forms">
+                <field name="unique_code"/>
+                <field name="name"/>
+                <field name="rank_applied"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="qualification"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_agency_application_form" model="ir.ui.view">
+        <field name="name">agency.application.form</field>
+        <field name="model">agency.application</field>
+        <field name="arch" type="xml">
+            <form string="Agency Application Form">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="unique_code" nolabel="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Personal Information">
+                            <field name="name"/>
+                            <field name="father_husband_name"/>
+                            <field name="rank_applied"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <field name="qualification"/>
+                        </group>
+                        <group string="Contact &amp; Identification">
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="pan_no"/>
+                            <field name="permanent_address"/>
+                        </group>
+                    </group>
+                    <group string="Nominee Details">
+                        <group>
+                            <field name="nominee_name"/>
+                            <field name="relation"/>
+                            <field name="nominee_age"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sales Record" name="sales_record">
+                            <field name="sales_line_ids">
+                                <tree editable="bottom">
+                                    <field name="sr_no" width="80px"/>
+                                    <field name="rank" width="250px"/>
+                                    <field name="code_no" width="400px"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_agency_application_form" model="ir.actions.act_window">
+        <field name="name">Agency Application Form</field>
+        <field name="res_model">agency.application</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

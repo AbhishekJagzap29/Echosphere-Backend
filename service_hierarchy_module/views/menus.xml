@@ -7,10 +7,15 @@
     <menuitem id="service_root"
             name="Services"
             parent="menu_service_root"
-            sequence="3"/>
+            sequence="1"/>
 
     <menuitem id="configuration_root"
             name="Configuration"
+            parent="menu_service_root"
+            sequence="2"/>
+
+    <menuitem id="forms_root"
+            name="Forms"
             parent="menu_service_root"
             sequence="3"/>
 
@@ -75,5 +80,18 @@
               action="action_service_request"
               groups="service_hierarchy_module.group_service_admin"
               sequence="10"/>
+
+    <!-- Forms Sub-menus -->
+    <menuitem id="menu_discount_card_form"
+            name="Discount Card Form"
+            parent="forms_root"
+            action="action_discount_card_form"
+            sequence="1"/>
+
+    <menuitem id="menu_agency_application_form"
+            name="Agency Application Form"
+            parent="forms_root"
+            action="action_agency_application_form"
+            sequence="2"/>
 
 </odoo>
