@@ -33,6 +33,23 @@ class DiscountCard(models.Model):
     pin_code = fields.Char(string='Pin Code')
     mobile = fields.Char(string='Mobile No')
 
+    def _auto_init(self):
+        res = super()._auto_init()
+        self.env.cr.execute("""
+            UPDATE discount_card 
+            SET unique_code = '#NSK' || unique_code 
+            WHERE unique_code IS NOT NULL 
+              AND unique_code != 'New' 
+              AND unique_code NOT LIKE '#NSK%';
+        """)
+        self.env.cr.execute("""
+            UPDATE ir_sequence
+            SET prefix = '#NSK'
+            WHERE code = 'discount.card.unique.code'
+              AND (prefix IS NULL OR prefix != '#NSK');
+        """)
+        return res
+
     @api.model
     def _default_unique_code(self):
         return 'New'
@@ -42,18 +59,25 @@ class DiscountCard(models.Model):
         for vals in vals_list:
             if not vals.get('unique_code') or vals.get('unique_code') == 'New':
                 seq = self.env['ir.sequence'].sudo().search([('code', '=', 'discount.card.unique.code')], limit=1)
-                if seq and seq.number_increment != 1:
-                    seq.sudo().write({'number_increment': 1})
+                if seq:
+                    seq_vals = {}
+                    if seq.number_increment != 1:
+                        seq_vals['number_increment'] = 1
+                    if seq.prefix != '#NSK':
+                        seq_vals['prefix'] = '#NSK'
+                    if seq_vals:
+                        seq.sudo().write(seq_vals)
                 seq_code = self.env['ir.sequence'].next_by_code('discount.card.unique.code')
                 if not seq_code:
                     last_rec = self.search([('unique_code', '!=', False), ('unique_code', '!=', 'New')], order='id desc', limit=1)
                     if last_rec and last_rec.unique_code:
                         try:
-                            seq_code = str(int(last_rec.unique_code) + 1)
+                            clean_code = last_rec.unique_code.replace('#NSK', '').strip()
+                            seq_code = f"#NSK{int(clean_code) + 1}"
                         except ValueError:
-                            seq_code = '16000'
+                            seq_code = '#NSK16000'
                     else:
-                        seq_code = '16000'
+                        seq_code = '#NSK16000'
                 vals['unique_code'] = seq_code
         return super().create(vals_list)
 

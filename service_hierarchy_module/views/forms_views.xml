@@ -3,7 +3,7 @@
     <record id="seq_discount_card_unique_code" model="ir.sequence">
         <field name="name">Discount Card Unique Code</field>
         <field name="code">discount.card.unique.code</field>
-        <field name="prefix"></field>
+        <field name="prefix">#NSK</field>
         <field name="padding">5</field>
         <field name="number_next">16000</field>
         <field name="number_increment">1</field>
@@ -15,7 +15,7 @@
         <field name="model">discount.card</field>
         <field name="arch" type="xml">
             <tree string="Discount Card Forms">
-                <field name="unique_code" string="Number" width="100px"/>
+                <field name="unique_code" string="Number" width="120px"/>
                 <field name="name" width="180px"/>
                 <field name="rank" width="300px"/>
                 <field name="code_no" width="500px"/>
